@@ -3,9 +3,29 @@
 require "../requires/conexao.php";
 require "../requires/bootstrap.php";
 
+// Consulta de categorias sempre disponível
+$sqlCategoria = "SELECT id, categoria FROM categorias";
+$resultCategoria = mysqli_query($conexao, $sqlCategoria);
 
+if($_SERVER['REQUEST_METHOD'] === 'POST'){
+
+  $nome = mysqli_real_escape_string($conexao, trim($_POST['nome_produto']));
+  $valor = mysqli_real_escape_string($conexao, trim($_POST['valor']));
+  $categoria_id = mysqli_real_escape_string($conexao, trim($_POST['categoria_id']));
+
+  $sql = "INSERT INTO produtos (nome, valor, categoria_id) VALUES ('$nome', '$valor', '$categoria_id')";
+
+  if(mysqli_query($conexao, $sql)){
+      header('Location: ../produto/produtoindex.php');
+      exit;
+  } else {
+      echo "Erro ao cadastrar: " . mysqli_error($conexao);
+  }
+}
 
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="ept-brn">
@@ -40,6 +60,32 @@ require "../requires/bootstrap.php";
 </nav> 
 </nav>
 
+<div class="container mt-4">
+  <form class="mt-1" action="" method="POST">
+      <div class="form-group">
+        <h2>Nome do Produto</h2>
+        <input type="text" class="form-control" name="nome_produto" placeholder="Nome do Produto">
+        <h3 class="mt-2">Valor do Produto  </h2>
+        <input type="text" class="form-control" name="valor" id="valor" placeholder="Valor do Produto">
+        <h3>Categoria do Produto</h2>
+
+        <select name="categoria_id">
+          <?php while($linha = mysqli_fetch_assoc($resultCategoria)): ?>
+            <option value="<?php echo $linha['id']; ?>"><?php echo $linha['categoria']; ?></option>
+            <?php endwhile; ?>
+        </select>
+
+        <input class="btn btn-success mt-2" type="submit" value="Criar">
+  </form>
+</div>
     
+<script>
+  // Formatação do campo de valor
+  document.getElementById('valor').addEventListener('input', function (e) {
+      let valor = e.target.value.replace(/\D/g, '');
+      valor = (valor / 100).toFixed(2).replace('.', ',');
+      e.target.value = 'R$ ' + valor;
+  });
+</script>
 </body>
 </html>

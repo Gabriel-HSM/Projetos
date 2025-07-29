@@ -4,8 +4,12 @@ require "../requires/bootstrap.php";
 require "../requires/footer.php";
 require "../requires/conexao.php";
 
-$query = mysqli_query($conexao, 'SELECT * FROM produtos ORDER BY id DESC');
-
+$query = mysqli_query($conexao, "
+    SELECT produtos.*, categorias.categoria 
+    FROM produtos 
+    JOIN categorias ON produtos.categoria_id = categorias.id
+    ORDER BY produtos.id DESC
+");
 
 ?>
 
@@ -74,7 +78,7 @@ $query = mysqli_query($conexao, 'SELECT * FROM produtos ORDER BY id DESC');
       <td>
         <button class="btn btn-primary btn-sm">Editar</button>
         <button class="btn btn-danger btn-sm">Excluir</button>
-        <button class="btn btn-primary btn-sm">Editar</button>
+
       </td>
     </tr>
   </tbody>

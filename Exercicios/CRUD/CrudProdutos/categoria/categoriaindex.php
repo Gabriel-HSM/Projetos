@@ -69,9 +69,9 @@ $query = mysqli_query($conexao, 'SELECT * FROM categorias ORDER BY id DESC');
       <th><?=$linha['id']?></th>
       <td><?=$linha['categoria']?></td>
       <td>
-        <button class="btn btn-primary btn-sm">Editar</button>
-        <button class="btn btn-danger btn-sm">Excluir</button>
-        <button class="btn btn-primary btn-sm">Editar</button>
+        <a class="btn btn-primary btn-sm" href="../editar/editarCategoria.php?id=<?= $linha['id'] ?>">Editar</a>
+        <a class="btn btn-danger btn-sm" href="../excluir/excluirCategoria.php?id=<?= $linha['id'] ?>">Excluir</a>
+
       </td>
     </tr>
   </tbody>

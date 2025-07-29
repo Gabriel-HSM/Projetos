@@ -38,10 +38,33 @@ require "requires/bootstrap.php";
 
 </nav> 
 </nav>
-<a class="btn btn-lg btn-primary mt-1" href="produto/produtoindex.php">PRODUTO</a>
-<a class="btn btn-lg btn-primary mt-1" href="categoria/categoriaindex.php">CATEGORIA</a>
 
-  
+<div class="container mt-3">
+  <div class="row justify-content-center">
+    <div class="col-md-3">
+      <div class="card" style="width: 18rem;">
+        <img src="imagens/produto1.png" class="card-img-top" alt="ìcone de produto">
+        <div class="card-body">
+          <h5 class="card-title">Produtos!</h5>
+          <a href="produto/produtoindex.php" class="btn btn-primary">Ir para produtos</a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-md-3">
+      <div class="card" style="width: 18rem;">
+        <img src="imagens/categoria.png" class="card-img-top" alt="ìcone decategoria">
+        <div class="card-body">
+          <h5 class="card-title">Categorias!</h5>
+          <a href="categoria/categoriaindex.php" class="btn btn-primary">Ir para Categorias</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
 </body>
 </html>
 
